@@ -7,23 +7,43 @@
 var client = new Paho.MQTT.Client("wss://test.mosquitto.org",8080, "web_" + parseInt(Math.random() * 100, 10));
 
 // Message recieved
+// set callback handlers
+  client.onConnectionLost = onConnectionLost;
+  client.onMessageArrived = onMessageArrived;
+  var options = {
+   useSSL: false,
+   // userName: "dyautibug.fie@unach.edu.ec",
+   // password: "daniels",
+    onSuccess:onConnect,
+    onFailure:doFail
+  }
 
-setTimeout(() => {
-  client.publish("daniels/test", "1010");
-}, 1000);
+  // connect the client
+  client.connect(options);
+   
+  // called when the client connects
+  function onConnect() {
+    // Once a connection has been made, make a subscription and send a message.
+    console.log("Conectado...");
+	
+    client.subscribe("daniels/test");
+    message = new Paho.MQTT.Message("SE A CONECTADO A LA WEB EXITOSAMENTE");
+    message.destinationName = "dyautibug.fie@unach.edu.ec/test1";
+    client.send(message);
+	
+  }
 
-client.on("message", (topic, payload) => {
-  // Log message
-  console.log(topic);
-  console.log(payload);
-  // Close the connection
-  client.end();
-});
+  function doFail(e){
+    console.log(e);
+	
+  }
 
-client.on("connect",  () => {
-  client.subscribe("daniels/test");
-  console.log("Connected to MQTT Broker.");
-});
+  // called when the client loses its connection
+  function onConnectionLost(responseObject) {
+    if (responseObject.errorCode !== 0) {
+      console.log("onConnectionLost:"+responseObject.errorMessage);
+    }
+  }
 ResTemp=0;
 ResPeso=0;
 ResAltura=0;
