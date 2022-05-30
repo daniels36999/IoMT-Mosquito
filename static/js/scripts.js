@@ -12,8 +12,8 @@ var client = new Paho.MQTT.Client("wss://test.mosquitto.org",8883, "web_" + pars
   client.onMessageArrived = onMessageArrived;
   var options = {
    useSSL: false,
-   // userName: "dyautibug.fie@unach.edu.ec",
-   // password: "daniels",
+   userName: "",
+   password: "",
     onSuccess:onConnect,
     onFailure:doFail
   }
