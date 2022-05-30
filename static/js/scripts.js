@@ -1,64 +1,46 @@
 ﻿ResTemp=0;
 ResPeso=0;
 ResAltura=0;
+ResImc=0;
+ResO2Sat=0;
 
 // Create a client instance
-client = new Paho.MQTT.Client("test.mosquitto.org", 8080, "myclientid_" + parseInt(Math.random() * 100, 10))
-//QUESTA E? QUELLA COPIATA CHE DOVFEBBE FUNZIONARE  ****************************** client = new Paho.MQTT.Client(location.hostname, Number(location.port), "clientId");
-//Example client = new Paho.MQTT.Client("m11.cloudmqtt.com", 32903, "web_" + parseInt(Math.random() * 100, 10));
-
-// set callback handlers
+client = new Paho.MQTT.Client("test.mosquitto.org", 8081, "myclientid_" + parseInt(Math.random() * 100, 10))
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
-
-// connect the client
 client.connect({ onSuccess: onConnect });
 
-
-// called when the client connects
 function onConnect() {
-
-
-
-    console.log("onconnect avviato")
-    // Once a connection has been made, make a subscription and send a message.
+    console.log("CONECTADO")
     console.log("onConnect");
-    client.subscribe("daniels/test");
-    message = new Paho.MQTT.Message("messaggio inviato via MQTT");
-    console.log("messaggio inviato via MQTT")
-    message.destinationName = "/World";
+    client.subscribe("Cabina/IoMT/Datos");
+    message = new Paho.MQTT.Message("SE HA ESTABLECIDO LA CONEXIÓN");
+    console.log("SE HA ESTABLECIDO LA CONEXIÓN")
+    message.destinationName = "Cabina/IoMT/Conexion";
     client.send(message);
+	
 }
 
 // called when the client loses its connection
 function onConnectionLost(responseObject) {
     if (responseObject.errorCode !== 0) {
-        console.log("onConnectionLost:" + responseObject.errorMessage);
+        console.log("Conexión Perdida:" + responseObject.errorMessage);
     }
 }
 
 // called when a message arrives
 function onMessageArrived(message) {
-    console.log("onMessageArrived:" + message.payloadString);
-	ResTemp=parseFloat(message.payloadString);
+	sms=(message.payloadString);
+	console.log(sms);
+	VectorDatos=sms.split(";")
+	ResTemp=VectorDatos[0];
+	ResPeso=VectorDatos[1];
+	ResAltura=VectorDatos[2];
+	ResImc=VectorDatos[3];
+	ResO2Sat=VectorDatos[4];
 }
 	  
-//	Dividir = sms.split(" ");
-//	Npalabras =Dividir.length;
 
-//	  if(sms=="Alta"){
-//	  	document.getElementById("sensor1").innerHTML="Temperatura: "+sms;
-//	  }
-//	  if(sms=="Baja"){
-//	  	document.getElementById("sensor1").innerHTML="Temperatura: "+sms;	  
-//	  }
-//	  if(Npalabras>=10){
-//	  	document.getElementById("historial").innerHTML=sms;	  
-//	  }
-//	  if(var1=="OO"){
-//	  	document.getElementById("historial").innerHTML="---------------------------";	  
-//	  }
-	  
 
 //EXPORTAR
 //----------------------------------------------------------------------------------
@@ -108,7 +90,7 @@ jQuery(function($){
     	  $('.tk-countdown .row').countdown({
     		date: endDate,
     		render: function(data) {
-    		  $(this.el).html('<div><div class="days"><span>' + this.leadingZeros(ResTemp, 4) + '</span><span>Temperatura [°C]</span></div><div class="hours"><span>' + this.leadingZeros(ResPeso, 4) + '</span><span>Peso [Kg]</span></div></div><div class="tk-countdown-ms"><div class="minutes"><span>' + this.leadingZeros(ResAltura, 4) + '</span><span>Estatura [m]</span></div><div class="seconds"><span>' + this.leadingZeros(ResTemp, 4) + '</span><span>IMC [Kg/m^2]</span></div></div><div><div class="days"><span>' + this.leadingZeros(ResTemp, 4) + '</span><span>O2Sat [%]</span></div>');
+    		  $(this.el).html('<div><div class="days"><span>' + this.leadingZeros(ResTemp, 4) + '</span><span>Temperatura [°C]</span></div><div class="hours"><span>' + this.leadingZeros(ResPeso, 4) + '</span><span>Peso [Kg]</span></div></div><div class="tk-countdown-ms"><div class="minutes"><span>' + this.leadingZeros(ResAltura, 4) + '</span><span>Estatura [m]</span></div><div class="seconds"><span>' + this.leadingZeros(ResImc, 4) + '</span><span>IMC [Kg/m^2]</span></div></div><div><div class="days"><span>' + this.leadingZeros(ResO2Sat, 4) + '</span><span>O2Sat [%]</span></div>');
     		}
     	  });
     	});	
