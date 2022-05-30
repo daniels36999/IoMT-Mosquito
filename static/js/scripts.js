@@ -40,7 +40,7 @@ function onConnectionLost(responseObject) {
 // called when a message arrives
 function onMessageArrived(message) {
     console.log("onMessageArrived:" + message.payloadString);
-	ResTemp=parseInt(message.payloadString);
+	ResTemp=parseFloat(message.payloadString);
 }
 	  
 //	Dividir = sms.split(" ");
