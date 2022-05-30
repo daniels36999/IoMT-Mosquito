@@ -1,5 +1,5 @@
-﻿﻿topicDaSottoscrivere = "daniels/test";
-messaggioDaInviare = "messaggio inviato via MQTT"
+﻿﻿topicDaSottoscrivere = "";
+messaggioDaInviare = ""
 
 // Create a client instance
 client = new Paho.MQTT.Client("test.mosquitto.org", 8081, "myclientid_" + parseInt(Math.random() * 100, 10))
@@ -15,16 +15,16 @@ client.connect({ onSuccess: onConnect });
 
 
 // called when the client connects
-function onConnect(topicDaSottoscrivere, messaggioDaInviare) {
+function onConnect() {
 
 
 
     console.log("onconnect avviato")
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect");
-    client.subscribe(topicDaSottoscrivere);
-    message = new Paho.MQTT.Message(messaggioDaInviare);
-    console.log(messaggioDaInviare)
+    client.subscribe("daniels/test");
+    message = new Paho.MQTT.Message(messaggio inviato via MQTT);
+    console.log(messaggio inviato via MQTT)
     message.destinationName = "/World";
     client.send(message);
 }
