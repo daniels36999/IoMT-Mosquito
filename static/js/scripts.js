@@ -4,7 +4,7 @@
 // Create a client instance
   //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);
   
-var client = new Paho.MQTT.Client("https://test.mosquitto.org/",8080, "web_" + parseInt(Math.random() * 100, 10));
+var client = new Paho.MQTT.Client("https://test.mosquitto.org/",8081, "web_" + parseInt(Math.random() * 100, 10));
 
 // Message recieved
 // set callback handlers
