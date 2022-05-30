@@ -5,7 +5,7 @@ ResImc=0;
 ResO2Sat=0;
 
 // Create a client instance
-client = new Paho.MQTT.Client("test.mosquitto.org", 8081, "myclientid_" + parseInt(Math.random() * 100, 10))
+client = new Paho.MQTT.Client("test.mosquitto.org", 8080, "myclientid_" + parseInt(Math.random() * 100, 10))
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 client.connect({ onSuccess: onConnect });
