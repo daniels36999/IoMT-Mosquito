@@ -45,6 +45,9 @@ function onMessageArrived(message) {
 //EXPORTAR
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
+//EXPORTAR
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
 function Exportar()
 {      
     var textToWrite = document.getElementById("historial").innerHTML;
@@ -62,16 +65,26 @@ function Exportar()
     document.body.appendChild(downloadLink);
     downloadLink.click();
 }
- 
-function destroyClickedElement(event)
+    function Capturar()///////////////////
 {
-    document.body.removeChild(event.target);
-}
-//----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
-  
+    var obtenernombre= document.getElementById("nombre").value; 
+    var obtenerapellido= document.getElementById("apellido").value; 
+    var obtenercurso= document.getElementById("curso").value; 
+    var ruta=(obtenernombre +"/"+ obtenerapellido +"/"+"obtenercurso");
+    var ruta1=("https://github.com/daniels36999/IoMT-BD/blob/main/Datos%20Almacenados/"+obtenercurso+"/"+obtenernombre+"%20"+obtenerapellido+".xlsx?raw=true");
 
 
+	const downloadInstance = document.createElement('a');
+	
+	b="https://github.com/paulromero1996/name/raw/main/MUESTRA.xlsx";
+	downloadInstance.href = ruta1;
+	downloadInstance.download = 'siuuu';
+	document.body.appendChild(downloadInstance)
+	downloadInstance.click();
+	document.body.removeChild(downloadInstance);
+      
+
+		}
 
 jQuery(function($){
 
