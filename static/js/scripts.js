@@ -4,12 +4,12 @@
 // Create a client instance
   //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);
   
-var client = mqtt.connect("wss://test.mosquitto.org:8081");
+var client = new Paho.MQTT.Client("wss://test.mosquitto.org",8080, "web_" + parseInt(Math.random() * 100, 10));
 
 // Message recieved
 
 setTimeout(() => {
-  client.publish("daniels/test", "Hello world!");
+  client.publish("daniels/test", "1010");
 }, 1000);
 
 client.on("message", (topic, payload) => {
