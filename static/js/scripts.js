@@ -2,7 +2,7 @@
 messaggioDaInviare = "messaggio inviato via MQTT"
 
 // Create a client instance
-var client = new Paho.MQTT.Client("ws://test.mosquitto.org:8080", 8080, "myclientid_" + parseInt(Math.random() * 100, 10))
+var client = new Paho.MQTT.Client("test.mosquitto.org", 8080, "myclientid_" + parseInt(Math.random() * 100, 10))
 //QUESTA E? QUELLA COPIATA CHE DOVFEBBE FUNZIONARE  ****************************** client = new Paho.MQTT.Client(location.hostname, Number(location.port), "clientId");
 //Example client = new Paho.MQTT.Client("m11.cloudmqtt.com", 32903, "web_" + parseInt(Math.random() * 100, 10));
 
