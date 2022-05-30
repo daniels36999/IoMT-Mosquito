@@ -1,5 +1,6 @@
-﻿﻿topicDaSottoscrivere = "";
-messaggioDaInviare = ""
+﻿ResTemp=0;
+ResPeso=0;
+ResAltura=0;
 
 // Create a client instance
 client = new Paho.MQTT.Client("test.mosquitto.org", 8080, "myclientid_" + parseInt(Math.random() * 100, 10))
@@ -39,6 +40,7 @@ function onConnectionLost(responseObject) {
 // called when a message arrives
 function onMessageArrived(message) {
     console.log("onMessageArrived:" + message.payloadString);
+	ResTemp=parseInt(message.payloadString);
 }
 	  
 //	Dividir = sms.split(" ");
@@ -57,10 +59,6 @@ function onMessageArrived(message) {
 //	  	document.getElementById("historial").innerHTML="---------------------------";	  
 //	  }
 	  
-	  
-ResTemp=0;
-ResPeso=0;
-ResAltura=0;
 
 //EXPORTAR
 //----------------------------------------------------------------------------------
