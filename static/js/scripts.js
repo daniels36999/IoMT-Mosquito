@@ -4,7 +4,7 @@
 // Create a client instance
   //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);
   
-  client = new Paho.MQTT.Client("test.mosquitto.org", 1883, "web_" + parseInt(Math.random() * 100, 10));
+  client = new Paho.MQTT.Client("https://test.mosquitto.org/", 8080, "web_" + parseInt(Math.random() * 100, 10));
 
   // set callback handlers
   client.onConnectionLost = onConnectionLost;
