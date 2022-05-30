@@ -58,7 +58,9 @@ function onMessageArrived(message) {
 //	  }
 	  
 	  
-
+ResTemp=0;
+ResPeso=0;
+ResAltura=0;
 
 //EXPORTAR
 //----------------------------------------------------------------------------------
