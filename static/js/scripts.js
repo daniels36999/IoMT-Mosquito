@@ -4,38 +4,26 @@
 // Create a client instance
   //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);
   
-  client = new Paho.MQTT.Client("https://test.mosquitto.org/", 8080, "web_" + parseInt(Math.random() * 100, 10));
+var client = mqtt.connect("wss://test.mosquitto.org:8081");
 
-  // set callback handlers
-  client.onConnectionLost = onConnectionLost;
-  client.onMessageArrived = onMessageArrived;
-  var options = {
-    onSuccess:onConnect,
-    onFailure:doFail
-  }
+// Message recieved
 
-  // connect the client
-  client.connect(options);
-   
-  // called when the client connects
-  function onConnect() {
-    // Once a connection has been made, make a subscription and send a message.
-    console.log("Conectado...");
-    client.subscribe("daniels/test");
-	
-  }
+setTimeout(() => {
+  client.publish("daniels/test", "Hello world!");
+}, 1000);
 
-  function doFail(e){
-    console.log(e);
-	
-  }
+client.on("message", (topic, payload) => {
+  // Log message
+  console.log(topic);
+  console.log(payload);
+  // Close the connection
+  client.end();
+});
 
-  // called when the client loses its connection
-  function onConnectionLost(responseObject) {
-    if (responseObject.errorCode !== 0) {
-      console.log("onConnectionLost:"+responseObject.errorMessage);
-    }
-  }
+client.on("connect",  () => {
+  client.subscribe("daniels/test");
+  console.log("Connected to MQTT Broker.");
+});
 ResTemp=0;
 ResPeso=0;
 ResAltura=0;
