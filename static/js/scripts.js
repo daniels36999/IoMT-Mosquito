@@ -23,8 +23,8 @@ function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect");
     client.subscribe("daniels/test");
-    message = new Paho.MQTT.Message(messaggio inviato via MQTT);
-    console.log(messaggio inviato via MQTT)
+    message = new Paho.MQTT.Message("messaggio inviato via MQTT");
+    console.log("messaggio inviato via MQTT")
     message.destinationName = "/World";
     client.send(message);
 }
