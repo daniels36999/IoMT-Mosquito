@@ -65,18 +65,17 @@ function Exportar()
     document.body.appendChild(downloadLink);
     downloadLink.click();
 }
-    function Capturar()///////////////////
+/*     function Capturar()///////////////////
 {
     var obtenernombre= document.getElementById("nombre").value; 
     var obtenerapellido= document.getElementById("apellido").value; 
     var obtenercurso= document.getElementById("curso").value; 
     var ruta=(obtenernombre +"/"+ obtenerapellido +"/"+"obtenercurso");
     var ruta1=("https://github.com/daniels36999/IoMT-BD/blob/main/Datos%20Almacenados/"+obtenercurso+"/"+obtenernombre+"%20"+obtenerapellido+".xlsx?raw=true");
+	document.getElementById("sensor1").value=ruta1;
 
 
 	const downloadInstance = document.createElement('a');
-	
-	b="https://github.com/paulromero1996/name/raw/main/MUESTRA.xlsx";
 	downloadInstance.href = ruta1;
 	downloadInstance.download = 'siuuu';
 	document.body.appendChild(downloadInstance)
@@ -84,7 +83,7 @@ function Exportar()
 	document.body.removeChild(downloadInstance);
       
 
-		}
+		} */
 
 jQuery(function($){
 
